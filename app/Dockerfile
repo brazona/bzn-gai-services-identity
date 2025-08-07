@@ -1,5 +1,5 @@
 # Etapa 1: Compilar a aplicação
-FROM maven:3.9.9-sapmachine-24 AS build
+FROM maven:3.9-sapmachine-11 AS build
 
 LABEL maintainer=Brazona\ Cézar
 VOLUME /tmp
