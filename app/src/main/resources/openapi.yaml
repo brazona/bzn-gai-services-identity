@@ -1,0 +1,1298 @@
+openapi: 3.0.4
+info:
+  title: Swagger Gai Identity - OpenAPI 3.0
+  description: |-
+    Este é um documento tratasse da especificação OpenAPI 3.0 do Micro Serviço Gai Identity.
+    O Gai Identity é um serviço que faz parte do ecossistema Brazona Tech, e é utilizado para gerenciar a identidade e o acesso dos usuários em diversos aplicativos e serviços.    
+    
+    Alguns links úteis:
+    - [Repositório de versionamento](https://github.com/brazona/bzn-gai-services)
+    - [Documentação da aplicação](https://github.com/brazona/bzn-gai-services)
+  termsOfService: https://swagger.io/terms/
+  contact:
+    email: suporte@brazona.com.br
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.12
+externalDocs:
+  description: Para saber mais sobre o sistema Brazona Tech.
+  url: https://www.brazona.com.br
+servers:
+  - url: /bzn-gai-services-identity/v1
+    description: Servidor de Produção do Gai Identity
+tags:
+  - name: credentials
+    description: Funcionalidade de credenciais do Gai Identity
+  - name: persons
+    description: Funcionalidade de pessoas do Gai Identity
+  - name: addresses
+    description: Funcionalidade de endereços do Gai Identity
+  - name: contact
+    description: Funcionalidade de contatos do Gai Identity
+  - name: institution
+    description: Funcionalidade de instituição do Gai Identity
+  - name: profiles
+    description: Funcionalidade de perfis do Gai Identity         
+paths:
+  /credentials/username:
+    put:
+      tags:
+        - credentials
+      summary: Atualiza credenciais de um usuário.
+      description: Atualiza as credenciais de um usuário existente no sistema.
+      operationId: updateCredentials
+      parameters:
+        - name: username
+          in: query
+          description: Nome de usuário para busca
+          required: true
+          schema:
+            type: string  
+      requestBody:
+        description: Objeto de credenciais para atualização
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CredentialModel'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Pet not found
+        '422':
+          description: Validation exception
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    
+    get:
+      tags:
+        - credentials
+      summary: Busca credenciais por nome de usuário.
+      description: Retorna as credenciais associadas ao nome de usuário fornecido.
+      operationId: getCredentialsByUsername
+      parameters:
+        - name: username
+          in: query
+          description: Nome de usuário para busca
+          required: true
+          schema:
+            type: string  
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CredentialModel'
+        '400':
+          description: Invalid status value
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      tags:
+        - credentials
+      summary: Deleta credenciais por nome de usuário.
+      description: Deleta as credenciais associadas ao nome de usuário fornecido.
+      operationId: deleteCredentialsByUsername
+      parameters:
+        - name: username
+          in: query
+          description: Nome de usuário para deletar as credenciais
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+        '400':
+          description: Invalid pet value
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /credentials:  
+    post:
+      tags:
+        - credentials
+      summary: Cria novas credenciais para um usuário.
+      description: Cria novas credenciais para um usuário existente no sistema.
+      operationId: createCredentials
+      requestBody:
+        description: Objeto de credenciais para criação
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CredentialModel'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    get:
+      tags:
+        - credentials
+      summary: Busca lista credenciais por nome de usuário.
+      description: Retorna as lista credenciais associadas ao nome de usuário fornecido.
+      operationId: getCredentialsByList
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CredentialModel'
+        '400':
+          description: Invalid status value
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /persons/document:
+    put:
+      tags:
+        - persons
+      summary: Atualiza dados de uma pessoa existente.
+      description: Atualiza os dados de uma pessoa existente no sistema através do documento.
+      operationId: updatePersonByDocument
+      parameters:
+        - name: document
+          in: query
+          description: Documento da pessoa para busca
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Objeto de pessoa para atualização
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonModel'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Pet not found
+        '422':
+          description: Validation exception
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    
+    get:
+      tags:
+        - persons
+      summary: Busca uma pessoa pelo documento.
+      description: Retorna os dados de uma pessoa existente no sistema através do documento.
+      operationId: getPersonByDocument
+      parameters:
+        - name: document
+          in: query
+          description: Documento da pessoa para busca
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonModel'
+        '400':
+          description: Invalid status value
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      tags:
+        - persons
+      summary: Deleta uma pessoa pelo documento.
+      description: Deleta os dados de uma pessoa existente no sistema através do documento.
+      operationId: deletePersonByDocument
+      parameters:
+        - name: document
+          in: query
+          description: Documento da pessoa para deletar
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+        '400':
+          description: Invalid pet value
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /persons:  
+    post:
+      tags:
+        - persons
+      summary: Cria uma nova pessoa.
+      description: Cria uma nova pessoa no sistema.
+      operationId: createPerson
+      requestBody:
+        description: Objeto de pessoa para criação
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonModel'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    get:
+      tags:
+        - persons
+      summary: Busca lista de pessoas.
+      description: Retorna uma lista de pessoas cadastradas no sistema.
+      operationId: getPersons
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonModel'
+        '400':
+          description: Invalid status value
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /addresses/document/name:
+    put:
+      tags:
+        - addresses
+      summary: Atualiza endereço de uma pessoa.
+      description: Atualiza o endereço de uma pessoa existente no sistema através do documento.
+      operationId: updateAddressByDocument
+      parameters:
+        - name: document
+          in: query
+          description: Documento da pessoa para busca
+          required: true
+          schema:
+            type: string
+        - name: name
+          in: query
+          description: Nome do endereço para busca
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Objeto de endereço para atualização  
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressModel'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Address not found
+        '422':
+          description: Validation exception
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error" 
+    
+    get:
+      tags:
+        - addresses
+      summary: Busca endereço de uma pessoa.
+      description: Retorna o endereço de uma pessoa existente no sistema através do documento e nome.
+      operationId: getAddressByDocumentAndName
+      parameters:
+        - name: document
+          in: query
+          description: Documento da pessoa para busca
+          required: true
+          schema:
+            type: string
+        - name: name
+          in: query
+          description: Nome do endereço para busca
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressModel'
+        '400':
+          description: Invalid status value
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      tags:
+        - addresses
+      summary: Deleta endereço de uma pessoa.
+      description: Deleta o endereço de uma pessoa existente no sistema através do documento e nome.
+      operationId: deleteAddressByDocumentAndName
+      parameters:
+        - name: document
+          in: query
+          description: Documento da pessoa para busca
+          required: true
+          schema:
+            type: string
+        - name: name
+          in: query
+          description: Nome do endereço para busca
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Address not found
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"  
+      
+  /addresses/document:  
+    post:
+      tags:
+        - addresses
+      summary: Cria um novo endereço.
+      description: Cria um novo endereço para uma pessoa no sistema.
+      operationId: createAddress
+      parameters:
+        - name: document
+          in: query
+          description: Documento da pessoa para criação do endereço
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Objeto de endereço para criação
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressModel'
+        required: true  
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    get:
+      tags:
+        - addresses
+      summary: Busca endereço de uma pessoa.
+      description: Retorna o endereço de uma pessoa cadastrada no sistema através do documento.
+      operationId: getAddressByDocument
+      parameters:
+        - name: document
+          in: query
+          description: Documento da pessoa para busca
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressModel'  
+        '400':
+          description: Invalid status value
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"                            
+
+  /contact/document:
+    put:
+      tags:
+        - contact
+      summary: Atualiza contato de uma pessoa.
+      description: Atualiza o contato de uma pessoa existente no sistema através do documento.
+      operationId: updateAddress
+      parameters:
+        - name: document
+          in: query
+          description: Documento da pessoa para busca
+          required: true
+          schema:
+            type: string  
+
+      requestBody:
+        description: Objeto de contato para atualização  
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactModel'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Address not found
+        '422':
+          description: Validation exception
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error" 
+    
+    get:
+      tags:
+        - contact
+      summary: Busca contato de uma pessoa.
+      description: Retorna o contato de uma pessoa existente no sistema através do documento.
+      operationId: getContactByDocument
+      parameters:
+        - name: document
+          in: query
+          description: Documento da pessoa para busca
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactModel'
+        '400':
+          description: Invalid status value
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      tags:
+        - contact
+      summary: Deleta o contato de uma pessoa.
+      description: Deleta o contato de uma pessoa existente no sistema através do documento.
+      operationId: deleteContactByDocument
+      parameters:
+        - name: document
+          in: query
+          description: Documento da pessoa para busca
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Address not found
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"  
+      
+    post:
+      tags:
+        - contact
+      summary: Cria um novo contato.
+      description: Cria um novo contato para uma pessoa no sistema.
+      operationId: createContact
+      parameters:
+        - name: document
+          in: query
+          description: Documento da pessoa para criação do contato
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Objeto de contato para criação
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactModel'
+        required: true  
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /institution/cnpj:
+    put:
+      tags:
+        - institution
+        
+      summary: Atualiza os dados de uma instituição.
+      description: Atualiza os dados de uma instituição existente no sistema através do CNPJ.
+      operationId: updateInstitution
+      parameters:
+        - name: cnpj
+          in: query
+          description: CNPJ da instituição para busca
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Objeto de instituição para atualização
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstitutionModel'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+        '400':
+          description: Invalid CNPJ supplied
+        '404':
+          description: Institution not found
+        '422':
+          description: Validation exception
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error" 
+    
+    get:
+      tags:
+        - institution
+      summary: Busca os dados de uma instituição.
+      description: Retorna os dados de uma instituição existente no sistema através do CNPJ.
+      operationId: getInstitutionByCnpj
+      parameters:
+        - name: cnpj
+          in: query
+          description: CNPJ da instituição para busca
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstitutionModel'
+        '400':
+          description: Invalid status value
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      tags:
+        - institution
+      summary: Deleta uma instituição.
+      description: Deleta uma instituição existente no sistema através do CNPJ.
+      operationId: deleteInstitutionByCnpj
+      parameters:
+        - name: cnpj
+          in: query
+          description: CNPJ da instituição para busca
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Address not found
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"  
+  /institution:      
+    post:
+      tags:
+        - institution
+      summary: Cria uma nova instituição.  
+      description: Cria uma nova instituição no sistema.
+      operationId: createInstitution
+      requestBody:
+        description: Objeto de instituição para criação
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstitutionModel'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+      
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    get:
+      tags:
+        - institution 
+      summary: Busca todas as instituições.
+      description: Retorna uma lista de todas as instituições cadastradas no sistema.
+      operationId: getAllInstitutions
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InstitutionModel'
+        '400':
+          description: Invalid status value
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /profiles/cnpj/name:
+    put:
+      tags:
+        - profiles
+      summary: Atualiza os dados de um perfil.
+      description: Atualiza os dados de um perfil existente no sistema através do CNPJ e nome.
+      operationId: updateProfileByCnpjAndName
+      parameters:
+        - name: cnpj
+          in: query
+          description: CNPJ do perfil para busca
+          required: true
+          schema:
+            type: string
+        - name: name
+          in: query
+          description: Nome do perfil para busca
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Objeto de perfil para atualização
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileModel'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+        '400':
+          description: Invalid CNPJ supplied
+        '404':
+          description: Profile not found
+        '422':
+          description: Validation exception
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      
+    get:
+      tags:
+        - profiles
+      summary: Busca os dados de um perfil.
+      description: Retorna os dados de um perfil existente no sistema através do CNPJ e nome
+      operationId: getProfileByCnpjAndName
+      parameters:
+        - name: cnpj
+          in: query
+          description: CNPJ do perfil para busca
+          required: true
+          schema:
+            type: string
+        - name: name
+          in: query
+          description: Nome do perfil para busca
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileModel'
+        '400':
+          description: Invalid CNPJ value
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+                
+    delete:
+      tags:
+        - profiles
+      summary: Deleta um perfil.
+      description: Deleta um perfil existente no sistema através do CNPJ e nome.
+      operationId: deleteProfileByCnpjAndName
+      parameters:
+        - name: cnpj
+          in: query
+          description: CNPJ do perfil para busca
+          required: true
+          schema:
+            type: string
+        - name: name
+          in: query
+          description: Nome do perfil para busca
+          required: true
+          schema:
+            type: string
+      
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+        '400':
+          description: Invalid CNPJ supplied
+        '404':
+          description: Profile not found
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      
+  /profiles/cnpj:      
+    post:
+      tags:
+        - profiles
+      summary: Cria um novo perfil.
+      description: Cria um novo perfil no sistema através do CNPJ.
+      operationId: createProfileByCnpj
+      parameters:
+        - name: cnpj
+          in: query
+          description: CNPJ do perfil para criação
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Objeto de perfil para criação
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileModel'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      
+    get:
+      tags:
+        - profiles
+      summary: Busca todos os perfis.
+      description: Retorna todos os perfis existentes para um determinado CNPJ.
+      operationId: getAllProfilesByCnpj
+      parameters:
+        - name: cnpj
+          in: query
+          description: CNPJ do perfil para busca
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProfileModel'
+        '400':
+          description: Invalid CNPJ value
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+               
+components:
+  schemas:
+    CredentialModel:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+          description: Nome identificador do usuário
+          example: usuario1
+        password:
+          type: string
+          description: Senha do usuário
+          example: '12345'
+    AddressModel:
+      type: object
+      required:
+        - name
+        - street
+        - number
+        - neighborhood
+        - city
+        - state
+        - country
+        - zipCode
+      properties:
+        name:
+          type: string
+          description: Nome do endereço
+          example: Endereço Residencial
+        street:
+          type: string
+          description: Rua do endereço
+          example: Rua das Flores
+        number:
+          type: string
+          description: Número do endereço
+          example: '123'                                                  
+        neighborhood:
+          type: string
+          description: Bairro do endereço
+          example: Jardim das Rosas  
+        city:
+          type: string
+          description: Cidade do endereço
+          example: São Paulo
+        state:
+          type: string
+          description: Estado do endereço
+          example: SP
+        country:
+          type: string
+          description: País do endereço
+          example: Brasil
+        zipCode:
+          type: string
+          description: Código postal do endereço
+          example: '12345-678'    
+    ContactModel:
+      type: object
+      required:
+        - phone
+        - email
+      properties:
+        phone:
+          type: string
+          description: Telefone de contato
+          example: '+55 11 91234-5678'
+        email:
+          type: string
+          description: Email de contato
+          example:
+    PersonModel:
+      type: object
+      required:
+        - name
+        - email
+        - document
+        - name_social
+        - gender
+      properties:
+        name:
+          type: string
+          description: Nome da pessoa
+          example: João da Silva
+        name_social:
+          type: string
+          description: Nome social da pessoa
+          example: Joãozinho
+        document:
+          type: string
+          description: Documento de identificação da pessoa
+          example: '123.456.789-00'
+        gender:
+          type: string
+          enum:
+            - Masculino
+            - Feminino
+            - Outro
+          description: Gênero da pessoa
+          example: Masculino
+        username:
+          type: string
+          description: Nome de usuário da pessoa  
+          example: joaozinho
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressModel'
+          description: Lista de endereços da pessoa
+        contact:
+          $ref: '#/components/schemas/ContactModel'
+          description: Contato da pessoa    
+    InstitutionModel:
+      type: object
+      required:
+        - name
+        - cnpj
+        - name_social
+        - address
+        - contact
+        - owners
+      properties:
+        name:
+          type: string
+          description: Nome da instituição
+          example: Instituição de Ensino XYZ
+        name_social:
+          type: string
+          description: Nome social da instituição
+          example: Instituição XYZ  
+        cnpj:
+          type: string
+          description: CNPJ da instituição
+          example: '12.345.678/0001-90'
+        address:
+          $ref: '#/components/schemas/AddressModel'
+          description: Endereço da instituição 
+        contact:
+          $ref: '#/components/schemas/ContactModel'
+          description: Contato da instituição
+        owners:
+          type: array
+          items:
+            $ref: '#/components/schemas/PersonModel'
+          description: Lista de proprietários da instituição           
+    FunctionalitiesModel:
+      type: object
+      required:
+        - name
+        - description
+        - product
+        - path
+      properties:
+        name:
+          type: string
+          description: Nome da funcionalidade
+          example: Gerenciamento de Usuários
+        description:
+          type: string
+          description: Descrição da funcionalidade
+          example: Permite gerenciar usuários do sistema
+        product_code:
+          type: string
+          description: Produto associado à funcionalidade
+          example: Gai Identity
+        path:
+          type: string
+          description: Caminho da funcionalidade
+          example: /user/manage
+        icon:
+          type: string
+          description: Ícone associado à funcionalidade
+          example: user-icon.png  
+    PermissionModel:
+      type: object
+      required:
+        - id
+        - functionality
+        - functionality_actions
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          description: Identificador único da permissão
+        functionality:
+          $ref: '#/components/schemas/FunctionalitiesModel'
+          description: Funcionalidade associada à permissão
+        functionality_actions:
+          type: array
+          items:
+            type: string
+            enum:
+              - INSERT
+              - READ
+              - EDIT
+              - DELETE
+              - APPROVE
+              - REJECT
+              - EXPORT
+              - IMPORT
+              - PRINT
+              - SHARE
+              - CANCEL
+              - REVIEW
+              - DELEGATE
+              - GENERATE_REPORT
+              - GENERATE_GRAPH
+          description: Ações permitidas na funcionalidade
+          example: [PRINT, READ]   
+    ProfileModel:
+      type: object
+      required:
+        - name
+        - description
+        - permissions
+        - institution
+      properties:
+        name:
+          type: string
+          description: Nome do perfil
+          example: Perfil de Administrador
+        description:
+          type: string
+          description: Descrição do perfil
+          example: Perfil de Administrador da organização
+        permissions:
+          type: array
+          items:  
+            $ref: '#/components/schemas/PermissionModel'
+            description: Lista de permissões associadas ao perfil  
+        institution:
+          $ref: '#/components/schemas/InstitutionModel'
+          description: Instituição associada ao perfil    
+    ResponseModel:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Código de resposta da operação
+          example: 200
+        message:
+          type: string
+          description: Mensagem de resposta da operação
+          example: Operação realizada com sucesso
+        dateProcessed:
+          type: string
+          format: date-time
+          description: Data e hora em que a operação foi processada
+          example: '2023-10-01T12:00:00Z'  
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Código de erro
+          example: '400'
+        message:
+          type: string
+          description: Mensagem de erro
+          example: 'Invalid input'
+        dateProcessed:
+          type: string
+          format: date-time
+          description: Data e hora em que a operação foi processada
+          example: '2023-10-01T12:00:00Z'    
+        details:
+          type: string
+          description: Detalhes adicionais sobre o erro
+          example: 'O campo "document" é obrigatório.'
+      required:
+        - code
+        - message
+  securitySchemes:
+    petstore_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+          scopes:
+            "write:pets": modify pets in your account
+            "read:pets": read your pets
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header

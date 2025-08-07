@@ -1,0 +1,113 @@
+name: Pipeline Build and Deploy [GRD]
+on:
+  pull_request:
+    paths:
+      - 'app/**'
+      - '.github/workflows/bzn-gdr-services.yml'   
+    branches:
+      - 'main'
+      - 'develop'
+      - 'bugfix/**'
+      - 'release/**'
+  push:
+    paths:
+      - 'app/**'
+      - '.github/workflows/bzn-gdr-services.yml'  
+    branches:
+      - 'main'    
+  workflow_dispatch:
+env:
+  # BRANCH_TARGET: ${{ github.ref_name }}
+  # BRANCH_SOURCE: ${{ github.ref_name }} 
+  # EVENT_TYPE: ${{ github.event_name }}
+  ### ATENÇÃO ###
+  ### Remover os valores abaixo fixados quando o ambiente estiver pronto para o deploy
+  BRANCH_TARGET: 2/merge
+  BRANCH_SOURCE: develop
+  EVENT_TYPE: pull_request
+  ENVIRONMENT_APP: ${{ github.event_name }}
+  REGISTRY_DOCKER: ghcr.io
+  REPOSITORY_DOCKER: ${{ github.repository }}
+  VERSION_TYPE: ''
+  APP: gdr
+jobs:
+  info-environment:
+    name: Identifying the Environment
+    permissions: write-all
+    uses: brazona/bzn-pgc-infra/.github/workflows/identifier.yml@main
+    with:
+      github_base_ref: ${{github.base_ref}}
+      github_event_name: ${{github.event_name }}
+      github_ref_name: ${{github.ref_name}}
+  generate-tag:
+    name: Generate Tag Image Docker
+    permissions: write-all
+    needs: [info-environment]
+    uses: brazona/bzn-pgc-infra/.github/workflows/tag.yml@main
+    with:
+      environment_name: ${{needs.info-environment.outputs.environment_name}}
+      path_pom: ./app/pom.xml
+  build:
+    name: Build Maven and Build/Push Image Docker
+    needs: [info-environment, generate-tag]
+    runs-on: ubuntu-latest
+    permissions: write-all
+    environment:
+      name: ${{needs.info-environment.outputs.environment_name}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          save-always: true
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Set up JDK 24
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '24'
+
+      - name: Build with Maven
+        run: mvn -f ./app/ clean install -Dmaven.javadoc.skip=true
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+        with:
+          registry: ${{ env.REGISTRY_DOCKER }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Docker Image
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        env:
+          TAG_IMAGE: ${{needs.generate-tag.outputs.tag}}
+        with:
+          context: ./app
+          push: true
+          tags: ${{ env.REGISTRY_DOCKER }}/${{ github.repository }}/${{ env.APP }}:${{env.TAG_IMAGE}}
+  #identifica as variaveis 
+  identify:
+    name: Call Identifier
+    uses: brazona/bzn-pgc-infra/.github/workflows/identifier.yml@main
+    with:
+      github_base_ref: ${{github.base_ref}}
+      github_event_name: ${{github.event_name }}
+      github_ref_name: ${{github.ref_name}}      
+  deploy-api:
+    name: Pipeline Deploy
+    needs: [build, generate-tag, info-environment, identify]
+    permissions: write-all
+    uses: brazona/bzn-pgc-infra/.github/workflows/pipeline-deploy.yml@main
+    secrets:
+      KUBECONFIG: ${{ secrets.KUBECONFIG }}
+    with:
+      environment_name: ${{needs.info-environment.outputs.environment_name}}
+      path_app: app
+      docker_image_tag: ${{needs.generate-tag.outputs.tag}}
+      environment_variable_name: ${{needs.generate-tag.outputs.tag}} 
+          

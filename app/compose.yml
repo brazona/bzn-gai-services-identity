@@ -1,0 +1,24 @@
+version: '3.0'
+
+services:
+  user:
+    container_name: ${CONTAINER_NAME}
+    hostname: ${CONTAINER_NAME}
+    build:
+      context: .
+    networks:
+      - bzn-network
+    restart: always
+    extra_hosts:
+    - "host.docker.internal:host-gateway"  
+    environment:
+    - SPRING_ACTIVE_PROFILE=${SPRING_ACTIVE_PROFILE}
+    - APPLICATION_NAME=${APPLICATION_NAME}
+    - CONFIG_SERVER_USER=${CONFIG_SERVER_USER}
+    - CONFIG_SERVER_PASS=${CONFIG_SERVER_PASS}
+    - CONFIG_SERVER_HOST=${CONFIG_SERVER_HOST}
+    - EUREKA_SERVER_HOST=${EUREKA_SERVER_HOST}
+
+networks:
+  bzn-network:
+    external: true
