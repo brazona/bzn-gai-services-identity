@@ -28,7 +28,7 @@ COPY src ./src
 RUN mvn clean install
 
 # Etapa 2: Criar a imagem final para execução
-FROM openjdk:24-slim
+FROM openjdk:26-slim
 
 # Define o diretório de trabalho dentro do contêiner
 WORKDIR /app
