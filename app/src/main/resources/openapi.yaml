@@ -64,11 +64,26 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResponseModel'
         '400':
-          description: Invalid ID supplied
+          description: Invalid Username
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+           
         '404':
-          description: Pet not found
+          description: Credential not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+ 
         '422':
           description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+ 
         default:
           description: Unexpected error
           content:
@@ -98,6 +113,10 @@ paths:
                 $ref: '#/components/schemas/CredentialModel'
         '400':
           description: Invalid status value
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
         default:
           description: Unexpected error
           content:
@@ -125,7 +144,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResponseModel'
         '400':
-          description: Invalid pet value
+          description: Invalid Username value
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -156,8 +180,18 @@ paths:
                 $ref: '#/components/schemas/ResponseModel'
         '400':
           description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         '422':
           description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -181,6 +215,11 @@ paths:
                   $ref: '#/components/schemas/CredentialModel'
         '400':
           description: Invalid status value
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -216,11 +255,26 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResponseModel'
         '400':
-          description: Invalid ID supplied
+          description: Invalid Name supplied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         '404':
-          description: Pet not found
+          description: Person not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         '422':
           description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -250,6 +304,11 @@ paths:
                 $ref: '#/components/schemas/PersonModel'
         '400':
           description: Invalid status value
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -277,7 +336,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResponseModel'
         '400':
-          description: Invalid pet value
+          description: Invalid Person value
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -307,8 +371,18 @@ paths:
                 $ref: '#/components/schemas/ResponseModel'
         '400':
           description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         '422':
           description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -332,6 +406,11 @@ paths:
                   $ref: '#/components/schemas/PersonModel'
         '400':
           description: Invalid status value
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -374,10 +453,25 @@ paths:
                 $ref: '#/components/schemas/ResponseModel'
         '400':
           description: Invalid ID supplied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         '404':
           description: Address not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         '422':
           description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -413,6 +507,11 @@ paths:
                 $ref: '#/components/schemas/AddressModel'
         '400':
           description: Invalid status value
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -447,8 +546,18 @@ paths:
                 $ref: '#/components/schemas/ResponseModel'
         '400':
           description: Invalid ID supplied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         '404':
           description: Address not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -486,8 +595,18 @@ paths:
                 $ref: '#/components/schemas/ResponseModel'
         '400':
           description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         '422':
           description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -516,6 +635,11 @@ paths:
                 $ref: '#/components/schemas/AddressModel'  
         '400':
           description: Invalid status value
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -554,10 +678,25 @@ paths:
                 $ref: '#/components/schemas/ResponseModel'
         '400':
           description: Invalid ID supplied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         '404':
-          description: Address not found
+          description: Contact not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         '422':
           description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -587,6 +726,11 @@ paths:
                 $ref: '#/components/schemas/ContactModel'
         '400':
           description: Invalid status value
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -615,8 +759,18 @@ paths:
                 $ref: '#/components/schemas/ResponseModel'
         '400':
           description: Invalid ID supplied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         '404':
-          description: Address not found
+          description: Contact not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -653,8 +807,18 @@ paths:
                 $ref: '#/components/schemas/ResponseModel'
         '400':
           description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         '422':
           description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -664,8 +828,7 @@ paths:
   /institution/cnpj:
     put:
       tags:
-        - institution
-        
+        - institution        
       summary: Atualiza os dados de uma instituição.
       description: Atualiza os dados de uma instituição existente no sistema através do CNPJ.
       operationId: updateInstitution
@@ -694,8 +857,18 @@ paths:
           description: Invalid CNPJ supplied
         '404':
           description: Institution not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         '422':
           description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -725,6 +898,11 @@ paths:
                 $ref: '#/components/schemas/InstitutionModel'
         '400':
           description: Invalid status value
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -753,8 +931,18 @@ paths:
                 $ref: '#/components/schemas/ResponseModel'
         '400':
           description: Invalid ID supplied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         '404':
           description: Address not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -785,8 +973,18 @@ paths:
       
         '400':
           description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         '422':
           description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -810,6 +1008,11 @@ paths:
                   $ref: '#/components/schemas/InstitutionModel'
         '400':
           description: Invalid status value
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -852,10 +1055,25 @@ paths:
                 $ref: '#/components/schemas/ResponseModel'
         '400':
           description: Invalid CNPJ supplied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         '404':
           description: Profile not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         '422':
           description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -891,6 +1109,11 @@ paths:
                 $ref: '#/components/schemas/ProfileModel'
         '400':
           description: Invalid CNPJ value
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -927,8 +1150,18 @@ paths:
                 $ref: '#/components/schemas/ResponseModel'
         '400':
           description: Invalid CNPJ supplied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         '404':
           description: Profile not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -966,8 +1199,18 @@ paths:
                 $ref: '#/components/schemas/ResponseModel'
         '400':
           description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         '422':
           description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
@@ -999,6 +1242,11 @@ paths:
                   $ref: '#/components/schemas/ProfileModel'
         '400':
           description: Invalid CNPJ value
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
         default:
           description: Unexpected error
           content:
