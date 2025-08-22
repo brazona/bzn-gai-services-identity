@@ -1,8 +1,11 @@
 package br.brazona.bzn_gai_services_identity.domain.mapper;
 
+import org.springframework.stereotype.Component;
+
 import br.brazona.bzn_gai_services_identity.domain.entity.CredentialEntity;
 import br.brazona.bzn_library_core.models.CredentialModel;
 
+@Component
 public class CredentialMapper {
 	
 	// This class is currently empty, but it can be used in the future to map

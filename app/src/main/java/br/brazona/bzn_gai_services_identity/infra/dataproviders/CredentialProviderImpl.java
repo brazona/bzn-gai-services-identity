@@ -2,13 +2,15 @@ package br.brazona.bzn_gai_services_identity.infra.dataproviders;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import br.brazona.bzn_gai_services_identity.domain.entity.CredentialEntity;
 import br.brazona.bzn_gai_services_identity.domain.providers.CredentialProvider;
 
 import br.brazona.bzn_gai_services_identity.infra.repositories.CredentialRepository;
 import lombok.RequiredArgsConstructor;
 
-
+@Service
 @RequiredArgsConstructor
 public class CredentialProviderImpl implements CredentialProvider {
 
