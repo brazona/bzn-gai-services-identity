@@ -18,25 +18,31 @@ import br.brazona.bzn_gai_services_identity.app.controllers.docs.CredentialContr
 import br.brazona.bzn_gai_services_identity.domain.services.CredentialService;
 import br.brazona.bzn_library_core.models.CredentialModel;
 import br.brazona.bzn_library_core.models.ResponseModel;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
+
+/**
+ * Interface Rest da Funcionalidade Credenciais.
+ *
+ * @author Brazona Tech
+ * @version 1.0.0
+ * @since release 1.0.0
+ */
+
 @RestController
 @RequestMapping(value = "/v1/credentials")
 public class CredentialControllerImpl implements CredentialControllerDocs, CredentialsApi {
-	
+
+	// Serviço de Credenciais
 	private final CredentialService credentialService;
 
-	
 	/** { @inheritDoc } */
 	@Override
 	@PutMapping(value = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseModel> updateCredentialsByUsername(@PathVariable String username, 
-		 @RequestBody CredentialModel credentialModel) {
-		credentialService.updateCredential(credentialModel);	
-		return ResponseEntity
-				.ok(ResponseModel.builder().code(200).message("Credential updated successfully")
-						.dateProcessed(java.time.LocalDateTime.now().toString()).build());
+	public ResponseEntity<ResponseModel> updateCredentialsByUsername(@PathVariable String username,
+			@RequestBody CredentialModel credentialModel) {
+		credentialService.updateCredential(credentialModel);
+		return ResponseEntity.ok(
+				new ResponseModel(200, "Credential updated successfully",java.time.LocalDateTime.now().toString()));
 	}
 
 	/** { @inheritDoc } */
@@ -44,8 +50,8 @@ public class CredentialControllerImpl implements CredentialControllerDocs, Crede
 	@PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseModel> createCredentials(@RequestBody CredentialModel credentialModel) {
 		credentialService.saveCredential(credentialModel);
-		return ResponseEntity.ok(ResponseModel.builder().code(201).message("Credential created successfully")
-				.dateProcessed(java.time.LocalDateTime.now().toString()).build());
+		return ResponseEntity.ok(
+				new ResponseModel(200, "Credential updated successfully",java.time.LocalDateTime.now().toString()));
 	}
 
 	/** { @inheritDoc } */
@@ -58,10 +64,10 @@ public class CredentialControllerImpl implements CredentialControllerDocs, Crede
 	/** { @inheritDoc } */
 	@Override
 	@DeleteMapping(value = "/{username}")
-	public ResponseEntity<ResponseModel> deleteCredentialsByUsername(@PathVariable  String username) {
+	public ResponseEntity<ResponseModel> deleteCredentialsByUsername(@PathVariable String username) {
 		credentialService.deleteCredentialByUsername(username);
-		return ResponseEntity.ok(ResponseModel.builder().code(200).message("Credential deleted successfully")
-				.dateProcessed(java.time.LocalDateTime.now().toString()).build());
+		return ResponseEntity.ok(
+				new ResponseModel(200, "Credential updated successfully",java.time.LocalDateTime.now().toString()));
 	}
 
 	/** { @inheritDoc } */
@@ -71,6 +77,16 @@ public class CredentialControllerImpl implements CredentialControllerDocs, Crede
 		return ResponseEntity.ok(credentialService.getAllCredentials());
 	}
 
-	
-	
+
+	/**
+	 * Constructs a new CredentialControllerImpl with the specified
+	 * CredentialService.
+	 *
+	 * @param credentialService the service used to manage credentials
+	 */
+	public CredentialControllerImpl(CredentialService credentialService) {
+		super();
+		this.credentialService = credentialService;
+	}
+
 }

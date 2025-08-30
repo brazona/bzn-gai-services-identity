@@ -48,8 +48,8 @@ public class CredentialMapper {
 		if (credentialEntity == null) {
 			return null;
 		}
-		return CredentialModel.builder().username(credentialEntity.getUsername())
-				.password(credentialEntity.getPassword()).build();
+		return new CredentialModel(credentialEntity.getUsername(), credentialEntity.getPassword());
+		
 	}
 
 }

@@ -48,6 +48,7 @@ public interface CredentialsApi {
                 content = @Content(schema = @Schema(implementation = ErrorModel.class)))
         }
     )
+    // classs return type List<CredentialModel>
     ResponseEntity<List<CredentialModel>> getCredentialsByList();
 
     @Operation(
@@ -64,6 +65,7 @@ public interface CredentialsApi {
                 content = @Content(schema = @Schema(implementation = ErrorModel.class)))
         }
     )
+    /* { @inheritDoc } */
     ResponseEntity<ResponseModel> updateCredentialsByUsername(
         @Parameter(description = "Nome de usuário para busca", required = true)
         String username,
@@ -81,6 +83,8 @@ public interface CredentialsApi {
                 content = @Content(schema = @Schema(implementation = ErrorModel.class)))
         }
     )
+    
+    // { @inheritDoc }
     ResponseEntity<CredentialModel> getCredentialsByUsername(
         @Parameter(description = "Nome de usuário para busca", required = true)
         String username

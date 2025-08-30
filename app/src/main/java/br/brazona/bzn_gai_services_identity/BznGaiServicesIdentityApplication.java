@@ -9,10 +9,27 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+
+/**
+ * Bzn Gai Services Identity Application
+ * 
+ * This is the main class for the Bzn Gai Services Identity application.
+ * It sets up the Spring Boot application with necessary configurations.
+ * 
+ * @author Brazona Team
+ */
+
+
 @EnableDiscoveryClient
 @SpringBootApplication
 public class BznGaiServicesIdentityApplication {
 
+	
+	/**
+	 * Main method to run the Bzn Gai Services Identity application.
+	 * 
+	 * @param args command line arguments
+	 */
 	public static void main(String[] args) {
 		SpringApplication.run(BznGaiServicesIdentityApplication.class, args);
 	}
