@@ -42,7 +42,10 @@ public class CredentialControllerImpl implements CredentialControllerDocs, Crede
 			@RequestBody CredentialModel credentialModel) {
 		credentialService.updateCredential(credentialModel);
 		return ResponseEntity.ok(
-				new ResponseModel(200, "Credential updated successfully",java.time.LocalDateTime.now().toString()));
+				ResponseModel.builder()
+				.code(200)
+				.message("Credential updated successfully")
+				.dateProcessed(java.time.LocalDateTime.now().toString()).build());
 	}
 
 	/** { @inheritDoc } */
@@ -51,7 +54,10 @@ public class CredentialControllerImpl implements CredentialControllerDocs, Crede
 	public ResponseEntity<ResponseModel> createCredentials(@RequestBody CredentialModel credentialModel) {
 		credentialService.saveCredential(credentialModel);
 		return ResponseEntity.ok(
-				new ResponseModel(200, "Credential updated successfully",java.time.LocalDateTime.now().toString()));
+				ResponseModel.builder()
+				.code(200)
+				.message("Credential updated successfully")
+				.dateProcessed(java.time.LocalDateTime.now().toString()).build());
 	}
 
 	/** { @inheritDoc } */
@@ -67,7 +73,10 @@ public class CredentialControllerImpl implements CredentialControllerDocs, Crede
 	public ResponseEntity<ResponseModel> deleteCredentialsByUsername(@PathVariable String username) {
 		credentialService.deleteCredentialByUsername(username);
 		return ResponseEntity.ok(
-				new ResponseModel(200, "Credential updated successfully",java.time.LocalDateTime.now().toString()));
+				ResponseModel.builder()
+				.code(200)
+				.message("Credential updated successfully")
+				.dateProcessed(java.time.LocalDateTime.now().toString()).build());
 	}
 
 	/** { @inheritDoc } */
