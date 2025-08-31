@@ -3,10 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.4</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<groupId>br.brazona</groupId>
+		<artifactId>bzn-parent-services</artifactId>
+		<version>0.0.3-SNAPSHOT</version>
 	</parent>
 	<groupId>br.brazona</groupId>
 	<artifactId>bzn-gai-services-identity</artifactId>
@@ -15,16 +14,18 @@
 	<description>Micro-serviço que fornece para o aplicativo GAI as
 		funcionalidades dos usuários das aplicações, disponibilizando as
 		informações de credenciais, papeis , perfils e etc.</description>
-	<properties>
-		<java.version>24</java.version>
-		<maven.compiler.source>${java.version}</maven.compiler.source>
-		<maven.compiler.target>${java.version}</maven.compiler.target>
-		<maven.javadoc.version>3.6.3</maven.javadoc.version>
-		<spring-cloud.version>2024.0.1</spring-cloud.version>
-		<bzn-library-core.version>0.0.2-SNAPSHOT</bzn-library-core.version>
-		<lombok.version>1.18.38</lombok.version>
-	</properties>
 	<dependencies>
+		<!-- BIBLIOTECAS HERDADAS BZN PARENT -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>br.brazona</groupId>
+			<artifactId>bzn-library-core</artifactId>
+		</dependency>
+
 		<!-- BIBLIOTECAS SPRING FRAMEWORK -->
 
 		<dependency>
@@ -124,50 +125,11 @@
 			<artifactId>swagger-annotations</artifactId>
 			<version>1.5.0</version>
 		</dependency>
-
-		<dependency>
-			<groupId>br.brazona</groupId>
-			<artifactId>bzn-library-core</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<!-- Use the latest stable version -->
-			<scope>provided</scope>
-		</dependency>
 	</dependencies>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-			<dependency>
-				<groupId>br.brazona</groupId>
-				<artifactId>bzn-library-core</artifactId>
-				<version>${bzn-library-core.version}</version>
-			</dependency>
-
-		</dependencies>
-	</dependencyManagement>
-
 	<repositories>
-		<!--<repository>
+		<repository>
 			<id>github-parent</id>
 			<url>https://maven.pkg.github.com/brazona/bzn-parent-services</url>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-				<checksumPolicy>warn</checksumPolicy>
-			</snapshots>
-		</repository>-->
-		<repository>
-			<id>github-core</id>
-			<url>https://maven.pkg.github.com/brazona/bzn-library-core</url>
 			<snapshots>
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>
