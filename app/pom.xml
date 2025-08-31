@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>br.brazona</groupId>
 		<artifactId>bzn-parent-services</artifactId>
-		<version>0.0.3-SNAPSHOT</version>
+		<version>0.0.4-SNAPSHOT</version>
 	</parent>
 	<groupId>br.brazona</groupId>
 	<artifactId>bzn-gai-services-identity</artifactId>
