@@ -159,6 +159,25 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<doclint>none</doclint>
+					<includeDependencySources>false</includeDependencySources>
+					<excludePackageNames>
+						br.brazona.bzn_gai_services_identity.app.controllers.api.*</excludePackageNames>
+					<excludes>**/BznGaiServicesIdentityApplication.java</excludes>		
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>

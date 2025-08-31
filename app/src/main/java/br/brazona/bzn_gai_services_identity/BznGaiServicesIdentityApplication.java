@@ -1,34 +1,48 @@
 package br.brazona.bzn_gai_services_identity;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+
 
 
 /**
  * Bzn Gai Services Identity Application
- * 
- * This is the main class for the Bzn Gai Services Identity application.
- * It sets up the Spring Boot application with necessary configurations.
- * 
- * @author Brazona Team
+ *
+ * <p>
+ * This is the entry point for the Bzn Gai Services Identity microservice.
+ * It leverages Spring Boot for application configuration and startup,
+ * and enables service discovery via Spring Cloud.
+ * </p>
+ *
+ * <ul>
+ *   <li>Annotated with {@code @SpringBootApplication} to indicate a Spring Boot application.</li>
+ *   <li>Annotated with {@code @EnableDiscoveryClient} to enable registration with a discovery service (e.g., Eureka, Consul).</li>
+ * </ul>
+ *
+ * <p>
+ * The {@code main} method bootstraps the application using {@link SpringApplication#run(Class, String...)}.
+ * </p>
+ *
+ * @author Brazona Tech
+ * @version 1.0.0
+ * @since release 1.0.0
  */
-
-
 @EnableDiscoveryClient
 @SpringBootApplication
 public class BznGaiServicesIdentityApplication {
-
 	
+
 	/**
-	 * Main method to run the Bzn Gai Services Identity application.
-	 * 
-	 * @param args command line arguments
+	 * The entry point of the BznGaiServicesIdentity Spring Boot application.
+	 * <p>
+	 * This method starts the Spring application context by invoking
+	 * {@link SpringApplication#run(Class, String...)} with the current application class
+	 * and command-line arguments.
+	 *
+	 * @param args command-line arguments passed to the application
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(BznGaiServicesIdentityApplication.class, args);

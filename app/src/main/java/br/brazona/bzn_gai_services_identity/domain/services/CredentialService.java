@@ -4,6 +4,23 @@ import java.util.List;
 
 import br.brazona.bzn_library_core.models.CredentialModel;
 
+/**
+ * Service interface for managing credentials.
+ * <p>
+ * Provides methods to retrieve, save, update, and delete credentials,
+ * as well as to list all credentials in the system.
+ * </p>
+ *
+ * <p>
+ * Implementations of this interface should handle the persistence and retrieval
+ * of {@link br.brazona.bzn_library_core.models.CredentialModel} objects.
+ * </p>
+ * 
+ * @author Brazona Tech
+ * @version 1.0.0
+ * @since release 1.0.0
+ */
+
 public interface CredentialService {
 
 	/**

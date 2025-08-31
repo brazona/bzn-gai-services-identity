@@ -10,13 +10,49 @@ import br.brazona.bzn_gai_services_identity.domain.services.CredentialService;
 import br.brazona.bzn_library_core.models.CredentialModel;
 import lombok.RequiredArgsConstructor;
 
+
+/**
+ * Service implementation for managing credentials.
+ * <p>
+ * This class provides methods to handle credential operations such as retrieving,
+ * saving, updating, and deleting credentials. It uses a {@link CredentialProvider}
+ * for data access and a {@link CredentialMapper} for mapping between entity and model.
+ * </p>
+ *
+ * <ul>
+ *   <li>{@link #getCredentialByUsername(String)} - Retrieves a credential by username.</li>
+ *   <li>{@link #saveCredential(CredentialModel)} - Saves a new credential.</li>
+ *   <li>{@link #deleteCredentialByUsername(String)} - Deletes a credential by username.</li>
+ *   <li>{@link #updateCredential(CredentialModel)} - Updates an existing credential.</li>
+ *   <li>{@link #getAllCredentials()} - Retrieves all credentials.</li>
+ * </ul>
+ *
+ * Dependencies are injected via constructor:
+ * <ul>
+ *   <li>{@link CredentialMapper} - Maps between credential entities and models.</li>
+ *   <li>{@link CredentialProvider} - Provides data access for credentials.</li>
+ * </ul>
+ *
+ * This class is annotated with {@link Service} for Spring component scanning and
+ * {@link lombok.RequiredArgsConstructor} for constructor injection.
+ *  
+ * @author Brazona Tech
+ * @version 1.0.0
+ * @since release 1.0.0
+ */
+
 @Service
 @RequiredArgsConstructor
 public class CredentialServiceImpl implements CredentialService{
-	
+
+	/** Dependencies injected via constructor */
 	private final CredentialMapper credentialMapper;
+	/** Dependencies injected via constructor */
 	private final CredentialProvider credentialProvider;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public CredentialModel getCredentialByUsername(String username) {
 		if (username == null || username.isEmpty()) {
@@ -28,7 +64,9 @@ public class CredentialServiceImpl implements CredentialService{
 		}
 		return null;
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void saveCredential(CredentialModel credential) {
 		
@@ -39,7 +77,9 @@ public class CredentialServiceImpl implements CredentialService{
 		credentialProvider.createCredential(credentialEntity);
 		
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void deleteCredentialByUsername(String username) {
 		if (username == null || username.isEmpty()) {
@@ -48,7 +88,9 @@ public class CredentialServiceImpl implements CredentialService{
 		credentialProvider.deleteCredential(username);
 		
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void updateCredential(CredentialModel credential) {
 		if (credential == null) {
@@ -61,7 +103,9 @@ public class CredentialServiceImpl implements CredentialService{
 		var credentialEntity = credentialMapper.toEntityId(credential, id);
 		credentialProvider.updateCredential(credentialEntity);
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<CredentialModel> getAllCredentials() {
 		return credentialProvider.getAllCredentials().stream().map(credentialMapper::toModel).toList();
