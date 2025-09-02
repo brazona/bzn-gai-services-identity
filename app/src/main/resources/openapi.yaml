@@ -19,7 +19,7 @@ externalDocs:
   description: Para saber mais sobre o sistema Brazona Tech.
   url: https://www.brazona.com.br
 servers:
-  - url: /bzn-gai-services-identity/v1
+  - url: /bzn-gai-services-identity
     description: Servidor de Produção do Gai Identity
 tags:
   - name: credentials
@@ -35,7 +35,7 @@ tags:
   - name: profiles
     description: Funcionalidade de perfis do Gai Identity         
 paths:
-  /credentials/username:
+  /credentials/v1/{username}:
     put:
       tags:
         - credentials
@@ -44,7 +44,7 @@ paths:
       operationId: updateCredentials
       parameters:
         - name: username
-          in: query
+          in: path
           description: Nome de usuário para busca
           required: true
           schema:
@@ -99,7 +99,7 @@ paths:
       operationId: getCredentialsByUsername
       parameters:
         - name: username
-          in: query
+          in: path
           description: Nome de usuário para busca
           required: true
           schema:
@@ -131,7 +131,7 @@ paths:
       operationId: deleteCredentialsByUsername
       parameters:
         - name: username
-          in: query
+          in: path
           description: Nome de usuário para deletar as credenciais
           required: true
           schema:
@@ -157,7 +157,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /credentials:  
+  /credentials/v1/create:  
     post:
       tags:
         - credentials
@@ -198,6 +198,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+
+  /credentials/v1/list:                
     get:
       tags:
         - credentials

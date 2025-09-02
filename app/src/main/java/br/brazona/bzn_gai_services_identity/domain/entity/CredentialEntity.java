@@ -1,7 +1,11 @@
 package br.brazona.bzn_gai_services_identity.domain.entity;
 
+import java.io.Serial;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -44,14 +48,13 @@ import lombok.Getter;
 
 @Entity
 @Table(name = "credentials")
-@Builder
 @Getter
 public class CredentialEntity {
 	
-	
-
+	@Serial
+    private static final long serialVersionUID = 1L;
 	@Id
-	@NotNull
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotNull
 	@NotBlank
@@ -60,4 +63,35 @@ public class CredentialEntity {
 	@NotNull
 	@NotBlank
 	private String password;
+
+	/**
+	 * 
+	 */
+	public CredentialEntity() {
+		super();
+	}
+	
+	
+	/**
+	 * @param id
+	 * @param username
+	 * @param password
+	 */
+	public CredentialEntity(@NotNull Long id, @NotNull @NotBlank String username, @NotNull @NotBlank String password) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+	}
+	
+	/**
+	 * @param username
+	 * @param password
+	 */
+	public CredentialEntity(@NotNull @NotBlank String username, @NotNull @NotBlank String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
+
 }

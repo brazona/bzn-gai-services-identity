@@ -52,7 +52,7 @@ import br.brazona.bzn_library_core.models.ResponseModel;
  */
 
 @RestController
-@RequestMapping(value = "/v1/credentials")
+@RequestMapping(value = "/credentials/v1")
 public class CredentialControllerImpl implements CredentialControllerDocs, CredentialsApi {
 
 	/**
@@ -87,7 +87,7 @@ public class CredentialControllerImpl implements CredentialControllerDocs, Crede
 	 * {@inheritDoc}
 	 */
 	@Override
-	@PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseModel> createCredentials(@RequestBody CredentialModel credentialModel) {
 		credentialService.saveCredential(credentialModel);
 		return ResponseEntity.ok(ResponseModel.builder().code(200).message("Credential updated successfully")
@@ -118,7 +118,7 @@ public class CredentialControllerImpl implements CredentialControllerDocs, Crede
 	 * {@inheritDoc}
 	 */
 	@Override
-	@GetMapping(value = "/")
+	@GetMapping(value = "/list")
 	public ResponseEntity<List<CredentialModel>> getCredentialsByList() {
 		return ResponseEntity.ok(credentialService.getAllCredentials());
 	}

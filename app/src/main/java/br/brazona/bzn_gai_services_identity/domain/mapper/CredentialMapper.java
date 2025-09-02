@@ -54,10 +54,8 @@ public class CredentialMapper {
 		if (credentialModel == null) {
 			return null;
 		}
-		return CredentialEntity.builder()
-				.username(credentialModel.getUsername())
-				.password(credentialModel.getPassword())
-				.build();
+
+		return new CredentialEntity(credentialModel.getUsername(), credentialModel.getPassword());
 	}
 	/**
 	 * Converts a {@link CredentialModel} object to a {@link CredentialEntity} object,
@@ -72,11 +70,8 @@ public class CredentialMapper {
 		if (credentialModel == null) {
 			return null;
 		}
-		return CredentialEntity.builder()
-				.username(credentialModel.getUsername())
-				.password(credentialModel.getPassword())
-				.id(id)
-				.build();
+		
+		return new CredentialEntity(id, credentialModel.getUsername(), credentialModel.getPassword());
 	}
 
 	/**
