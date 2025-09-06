@@ -59,4 +59,6 @@ public interface CredentialProvider {
 	 * @return a list of all credential entities
 	 */
 	List<CredentialEntity> getAllCredentials();
+	
+	boolean existsByUsername(String username);
 }

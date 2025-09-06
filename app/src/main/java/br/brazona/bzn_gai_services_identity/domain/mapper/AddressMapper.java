@@ -22,7 +22,8 @@ public class AddressMapper {
 			return null;
 		}
 		return AddressEntity.builder().username(address.getUsername()).name(address.getName())
-				.street(address.getStreet()).city(address.getCity()).state(address.getState())
+				.street(address.getStreet()).number(address.getNumber()).complement(address.getComplement())
+				.neighborhood(address.getNeighborhood()).city(address.getCity()).state(address.getState())
 				.zipCode(address.getZipCode()).country(address.getCountry()).build();
 	}
 	public AddressEntity toEntityId(AddressModel address, Long id) {

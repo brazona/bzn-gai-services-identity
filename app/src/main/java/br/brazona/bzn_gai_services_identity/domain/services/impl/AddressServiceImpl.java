@@ -16,15 +16,11 @@ public class AddressServiceImpl implements AddressService {
 
 	private final AddressProvider addressProvider;
 	private final AddressMapper addressMapper;
+	private final CredentialServiceImpl credentialService;
 
 	@Override
 	public AddressModel getAddressByUsernameAndName(String username, String name) {
-		if (username == null || username.isBlank()) {
-			throw new IllegalArgumentException("Username cannot be null or blank");
-		}
-		if (name == null || name.isBlank()) {
-			throw new IllegalArgumentException("Name cannot be null or blank");
-		}
+		validationUsername(username);
 		var addressEntity = addressProvider.getAddressByUsernameAndName(username, name);
 		if (addressEntity == null) {
 			return null;
@@ -33,24 +29,39 @@ public class AddressServiceImpl implements AddressService {
 	}
 
 	@Override
-	public void updateAddressByUsernameAndName(
+	public void updateAddressByUsernameAndName(String username, String name,
 			AddressModel address) {
+		validationUsername(username);
 		addressProvider.updateAddressByUsernameAndName(addressMapper.toEntity(address));
 	}
 
 	@Override
-	public void createAddressByUsername(AddressModel address) {
+	public void createAddressByUsername(String username, AddressModel address) {
+		validationUsername(username);
 		addressProvider.createAddressByUsername(addressMapper.toEntity(address));
 	}
 
 	@Override
 	public void deleteAddressByUsernameAndName(String username, String name) {
+		validationUsername(username);
 		addressProvider.deleteAddressByUsernameAndName(username, name);
 	}
 
 	@Override
 	public List<AddressModel> getAddressListByUsername(String username) {
+		validationUsername(username);	
 		return addressMapper.toModelList(addressProvider.getAddressListByUsername(username));
+	}
+	private boolean existsByUsername(String username) {
+		return credentialService.existsByUsername(username);
+	};
+	private void validationUsername(String username) {
+		if (username == null || username.isBlank()) {
+			throw new IllegalArgumentException("Username cannot be null or blank");
+		}
+		if (!existsByUsername(username)) {
+			throw new IllegalArgumentException("Username does not exist");
+		}
 	}
 
 }

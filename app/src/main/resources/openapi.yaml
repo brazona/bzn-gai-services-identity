@@ -423,8 +423,8 @@ paths:
     put:
       tags:
         - addresses
-      summary: Atualiza endereço de uma pessoa.
-      description: Atualiza o endereço de uma pessoa existente no sistema através do documento.
+      summary: Atualiza endereço de um usuário.
+      description: Atualiza as endereço de um usuário existente no sistema.
       operationId: updateAddressByUsernameAndName
       parameters:
         - name: username
@@ -484,8 +484,8 @@ paths:
     get:
       tags:
         - addresses
-      summary: Busca endereço de uma pessoa.
-      description: Retorna o endereço de uma pessoa existente no sistema através do documento e nome.
+      summary: Busca endereço por nome de usuário e nome do endereço.
+      description: Retorna as endereço associadas ao nome de usuário fornecido e nome do endereço.
       operationId: getAddressByUsernameAndName
       parameters:
         - name: username
@@ -523,8 +523,8 @@ paths:
     delete:
       tags:
         - addresses
-      summary: Deleta endereço de uma pessoa.
-      description: Deleta o endereço de uma pessoa existente no sistema através do documento e nome.
+      summary: Deleta endereço por nome de usuário e nome do endereço.
+      description: Deleta o endereço associadas ao nome de usuário fornecido.
       operationId: deleteAddressByUsernameAndName
       parameters:
         - name: username
@@ -572,7 +572,7 @@ paths:
       tags:
         - addresses
       summary: Cria um novo endereço.
-      description: Cria um novo endereço para uma pessoa no sistema.
+      description: Cria um novo endereço para uma Usuário no sistema.
       operationId: createAddressByUsername
       parameters:
         - name: username
@@ -619,8 +619,8 @@ paths:
     get:
       tags:
         - addresses
-      summary: Busca todos os endereço de uma pessoa.
-      description: Retorna o endereço de uma pessoa cadastrada no sistema através do documento.
+      summary: Busca lista endereço por nome de usuário.
+      description: Retorna as lista endereço associadas ao nome de usuário fornecido.
       operationId: getAddressListByUsername
       parameters:
         - name: username
@@ -636,7 +636,8 @@ paths:
             application/json:
               schema:
                 type: array
-                $ref: '#/components/schemas/AddressModel'  
+                items:
+                  $ref: '#/components/schemas/AddressModel'  
         '400':
           description: Invalid status value
           content:

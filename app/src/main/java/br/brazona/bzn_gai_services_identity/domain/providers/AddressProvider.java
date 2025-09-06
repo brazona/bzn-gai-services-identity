@@ -14,4 +14,6 @@ public interface AddressProvider {
 	AddressEntity createAddressByUsername(AddressEntity address);
 	void deleteAddressByUsernameAndName(String username, String name);
 	List<AddressEntity> getAddressListByUsername(String username);
+	
 }
+

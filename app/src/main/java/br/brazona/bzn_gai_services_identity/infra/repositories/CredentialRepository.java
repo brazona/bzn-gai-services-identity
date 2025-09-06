@@ -40,5 +40,7 @@ public interface CredentialRepository extends JpaRepository<CredentialEntity, Lo
 	 */
 	@Query("SELECT c FROM CredentialEntity c WHERE c.username = ?1")
 	CredentialEntity findByUsername(String username);
+	
+	boolean existsByUsername(String username);
 
 }

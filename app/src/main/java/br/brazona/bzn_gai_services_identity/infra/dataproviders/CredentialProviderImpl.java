@@ -69,5 +69,9 @@ public class CredentialProviderImpl implements CredentialProvider {
 	public List<CredentialEntity> getAllCredentials() {
 		return credentialRepository.findAll();
 	}
+	@Override
+	public boolean existsByUsername(String username) {
+		return credentialRepository.existsByUsername(username);
+	}
 
 }

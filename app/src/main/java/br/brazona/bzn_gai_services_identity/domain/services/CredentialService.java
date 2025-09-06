@@ -59,4 +59,5 @@ public interface CredentialService {
 	 * @return a list of all credentials
 	 */
 	List<CredentialModel> getAllCredentials();
+	boolean existsByUsername(String username);
 }

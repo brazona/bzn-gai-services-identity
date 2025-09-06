@@ -52,7 +52,6 @@ public class AddressEntity {
 	private String zipCode;
 	@NotNull
 	@NotBlank
-	@Column(unique = true)
 	private String username;
 	
 	public AddressEntity() {
