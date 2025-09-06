@@ -156,7 +156,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-
   /credentials/v1/create:  
     post:
       tags:
@@ -198,7 +197,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-
   /credentials/v1/list:                
     get:
       tags:
@@ -228,17 +226,17 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /persons/document:
+  /persons/v1/{person_code}:
     put:
       tags:
         - persons
       summary: Atualiza dados de uma pessoa existente.
-      description: Atualiza os dados de uma pessoa existente no sistema através do documento.
-      operationId: updatePersonByDocument
+      description: Atualiza os dados de uma pessoa existente no sistema através do codigo.
+      operationId: updatePersonByCode
       parameters:
-        - name: document
-          in: query
-          description: Documento da pessoa para busca
+        - name: person_code
+          in: path
+          description: Código da Pessoa.
           required: true
           schema:
             type: string
@@ -283,17 +281,16 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-    
     get:
       tags:
         - persons
-      summary: Busca uma pessoa pelo documento.
-      description: Retorna os dados de uma pessoa existente no sistema através do documento.
-      operationId: getPersonByDocument
+      summary: Busca uma pessoa pelo codigo.
+      description: Retorna os dados de uma pessoa existente no sistema através do código.
+      operationId: getPersonByCode
       parameters:
-        - name: document
-          in: query
-          description: Documento da pessoa para busca
+        - name: person_code
+          in: path
+          description: Código da Pessoa.
           required: true
           schema:
             type: string
@@ -320,13 +317,13 @@ paths:
     delete:
       tags:
         - persons
-      summary: Deleta uma pessoa pelo documento.
-      description: Deleta os dados de uma pessoa existente no sistema através do documento.
-      operationId: deletePersonByDocument
+      summary: Deleta uma pessoa pelo código.
+      description: Deleta os dados de uma pessoa existente no sistema através do código.
+      operationId: deletePersonByCode
       parameters:
-        - name: document
-          in: query
-          description: Documento da pessoa para deletar
+        - name: person_code
+          in: path
+          description: Código da Pessoa.
           required: true
           schema:
             type: string
@@ -350,7 +347,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /persons:  
+  /persons/v1/create:  
     post:
       tags:
         - persons
@@ -391,12 +388,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /persons/v1/{person_code}/list:  
     get:
       tags:
         - persons
-      summary: Busca lista de pessoas.
+      summary: Busca lista de pessoas pelo codigo.
       description: Retorna uma lista de pessoas cadastradas no sistema.
-      operationId: getPersons
+      operationId: getPersonsByCodeByList
       responses:
         '200':
           description: successful operation
@@ -565,8 +563,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"  
-      
+                $ref: "#/components/schemas/Error"   
   /addresses/v1/{username}/create:
     post:
       tags:
@@ -651,13 +648,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"                            
-
   /contact/document:
     put:
       tags:
         - contact
       summary: Atualiza contato de uma pessoa.
-      description: Atualiza o contato de uma pessoa existente no sistema através do documento.
+      description: Atualiza o contato de uma pessoa existente no sistema através do código.
       operationId: updateAddress
       parameters:
         - name: document
@@ -713,8 +709,8 @@ paths:
       tags:
         - contact
       summary: Busca contato de uma pessoa.
-      description: Retorna o contato de uma pessoa existente no sistema através do documento.
-      operationId: getContactByDocument
+      description: Retorna o contato de uma pessoa existente no sistema através do código.
+      operationId: getContactByCode
       parameters:
         - name: document
           in: query
@@ -746,8 +742,8 @@ paths:
       tags:
         - contact
       summary: Deleta o contato de uma pessoa.
-      description: Deleta o contato de uma pessoa existente no sistema através do documento.
-      operationId: deleteContactByDocument
+      description: Deleta o contato de uma pessoa existente no sistema através do código.
+      operationId: deleteContactByCode
       parameters:
         - name: document
           in: query
@@ -1172,8 +1168,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-      
+                $ref: "#/components/schemas/Error"    
   /profiles/cnpj:      
     post:
       tags:
@@ -1349,7 +1344,12 @@ components:
         - document
         - name_social
         - gender
+        - username
       properties:
+        person_code:
+          type: string
+          description: Código único da pessoa
+          example: 'abc123'      
         name:
           type: string
           description: Nome da pessoa
@@ -1373,7 +1373,7 @@ components:
         username:
           type: string
           description: Nome de usuário da pessoa  
-          example: joaozinho
+          example: email@email.com
         addresses:
           type: array
           items:
