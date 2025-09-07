@@ -417,17 +417,17 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /addresses/v1/{username}/{name}:
+  /addresses/v1/{person_code}/{name}:
     put:
       tags:
         - addresses
-      summary: Atualiza endereço de um usuário.
-      description: Atualiza as endereço de um usuário existente no sistema.
-      operationId: updateAddressByUsernameAndName
+      summary: Atualiza endereço de uma pessoa.
+      description: Atualiza as endereço de vinculado a uma pessoa existente no sistema.
+      operationId: updateAddressByPersonCodeAndName
       parameters:
-        - name: username
+        - name: person_code
           in: path
-          description: Nome de usuário para busca
+          description: Código da pessoa para busca
           required: true
           schema:
             type: string
@@ -477,21 +477,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error" 
-    
+                $ref: "#/components/schemas/Error"  
     get:
       tags:
         - addresses
-      summary: Busca endereço por nome de usuário e nome do endereço.
-      description: Retorna as endereço associadas ao nome de usuário fornecido e nome do endereço.
-      operationId: getAddressByUsernameAndName
+      summary: Busca endereço pelo codigo da pessoa e nome do endereço.
+      description: Retorna as endereço associadas ao código da pessoa fornecido e nome do endereço.
+      operationId: getAddressByPersonCodeAndName
       parameters:
-        - name: username
+        - name: person_code
           in: path
-          description: Nome de usuário para busca
+          description: Código da pessoa para busca
           required: true
           schema:
-            type: string 
+            type: string
         - name: name
           in: path
           description: Nome do endereço para busca
@@ -521,13 +520,13 @@ paths:
     delete:
       tags:
         - addresses
-      summary: Deleta endereço por nome de usuário e nome do endereço.
-      description: Deleta o endereço associadas ao nome de usuário fornecido.
-      operationId: deleteAddressByUsernameAndName
+      summary: Deleta endereço por código da pessoa e nome do endereço.
+      description: Deleta o endereço associadas ao código da pessoa fornecido.
+      operationId: deleteAddressByPersonCodeAndName
       parameters:
-        - name: username
+        - name: person_code
           in: path
-          description: Nome de usuário para busca
+          description: Código da pessoa para busca
           required: true
           schema:
             type: string 
@@ -564,17 +563,17 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"   
-  /addresses/v1/{username}/create:
+  /addresses/v1/{person_code}/create:
     post:
       tags:
         - addresses
       summary: Cria um novo endereço.
-      description: Cria um novo endereço para uma Usuário no sistema.
-      operationId: createAddressByUsername
+      description: Cria um novo endereço para uma Pessoa no sistema.
+      operationId: createAddressByPersonCode
       parameters:
-        - name: username
+        - name: person_code
           in: path
-          description: Nome de usuário para busca
+          description: Código da pessoa para criação do endereço
           required: true
           schema:
             type: string
@@ -612,17 +611,17 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /addresses/v1/{username}/list:              
+  /addresses/v1/{person_code}/list:              
     get:
       tags:
         - addresses
-      summary: Busca lista endereço por nome de usuário.
-      description: Retorna as lista endereço associadas ao nome de usuário fornecido.
-      operationId: getAddressListByUsername
+      summary: Busca lista endereço.
+      description: Retorna as lista endereço associadas ao código da pessoa fornecido.
+      operationId: getAddressListByPersonCode
       parameters:
-        - name: username
+        - name: person_code
           in: path
-          description: Nome de usuário para busca
+          description: Código da pessoa para busca
           required: true
           schema:
             type: string
@@ -1281,6 +1280,7 @@ components:
         - state
         - country
         - zipCode
+        - person_code
       properties:
         name:
           type: string
@@ -1318,10 +1318,10 @@ components:
           type: string
           description: Código postal do endereço
           example: '12345-678'
-        username:
+        person_code:
           type: string
-          description: Nome de usuário associado ao endereço
-          example: joaozinho@email.com      
+          description: Código único da pessoa associada ao endereço
+          example: 'abc123' 
     ContactModel:
       type: object
       required:
