@@ -388,13 +388,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /persons/v1/{person_code}/list:  
+  /persons/v1/list:  
     get:
       tags:
         - persons
-      summary: Busca lista de pessoas pelo codigo.
+      summary: Busca lista de pessoas.
       description: Retorna uma lista de pessoas cadastradas no sistema.
-      operationId: getPersonsByCodeByList
+      operationId: getAllPersons
       responses:
         '200':
           description: successful operation
