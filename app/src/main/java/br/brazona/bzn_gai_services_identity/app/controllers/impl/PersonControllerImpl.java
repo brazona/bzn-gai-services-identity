@@ -45,8 +45,8 @@ public class PersonControllerImpl implements PersonControllerDocs, PersonApi {
 	 */
 	@Override
 	@GetMapping(value = "/{person_code}")
-	public ResponseEntity<PersonModel> getPersonByCode(@PathVariable String personCode) {
-		return ResponseEntity.ok(personService.getPersonByCode(personCode));
+	public ResponseEntity<PersonModel> getPersonByCode(@PathVariable String person_code) {
+		return ResponseEntity.ok(personService.getPersonByCode(person_code));
 	}
 
 	/**
@@ -54,8 +54,8 @@ public class PersonControllerImpl implements PersonControllerDocs, PersonApi {
 	 */
 	@Override
 	@PutMapping(value = "/{person_code}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseModel> updatePersonByCode(@PathVariable String personCode, @RequestBody PersonModel personModel) {
-		personService.updatePersonByCode(personCode, personModel);
+	public ResponseEntity<ResponseModel> updatePersonByCode(@PathVariable String person_code, @RequestBody PersonModel personModel) {
+		personService.updatePersonByCode(person_code, personModel);
 		return ResponseEntity.ok(ResponseModel.builder().code(200).message(MessageConst.MSG001)
 				.dateProcessed(java.time.LocalDateTime.now().toString()).build());
 	}
@@ -65,8 +65,8 @@ public class PersonControllerImpl implements PersonControllerDocs, PersonApi {
 	 */
 	@Override
 	@DeleteMapping(value = "/{person_code}")
-	public ResponseEntity<ResponseModel> deletePersonByCode(@PathVariable String personCode) {
-		personService.deletePersonByCode(personCode);
+	public ResponseEntity<ResponseModel> deletePersonByCode(@PathVariable String person_code) {
+		personService.deletePersonByCode(person_code);
 		return ResponseEntity.ok(ResponseModel.builder().code(200).message(MessageConst.MSG001)
 				.dateProcessed(java.time.LocalDateTime.now().toString()).build());
 	}

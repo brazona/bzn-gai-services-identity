@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import br.brazona.bzn_gai_services_identity.domain.entity.CredentialEntity;
 import br.brazona.bzn_gai_services_identity.domain.entity.PersonEntity;
 
 @Repository
@@ -15,4 +16,8 @@ public interface PersonRepository extends JpaRepository<PersonEntity, Long> {
 	long findIdByPersonCode(String person_code);
 	
 	boolean existsByPersonCode(String person_code);
+		
+	@Query("SELECT c FROM PersonEntity c WHERE c.credential = ?1")
+	PersonEntity findPersonByCredential(CredentialEntity credential);
+	
 }

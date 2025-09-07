@@ -54,7 +54,7 @@ public interface PersonApi {
                 content = @Content(schema = @Schema(implementation = ErrorModel.class)))
         }
     )
-    ResponseEntity<PersonModel> getPersonByCode(String personCode);
+    ResponseEntity<PersonModel> getPersonByCode(String person_code);
 
     @Operation(
         method = "PUT",
@@ -78,7 +78,7 @@ public interface PersonApi {
                 content = @Content(schema = @Schema(implementation = ErrorModel.class)))
         }
     )
-    ResponseEntity<ResponseModel> updatePersonByCode(String personCode, PersonModel personModel);
+    ResponseEntity<ResponseModel> updatePersonByCode(String person_code, PersonModel personModel);
 
     @Operation(
         method = "DELETE",
@@ -96,7 +96,7 @@ public interface PersonApi {
                 content = @Content(schema = @Schema(implementation = ErrorModel.class)))
         }
     )
-    ResponseEntity<ResponseModel> deletePersonByCode(String personCode);
+    ResponseEntity<ResponseModel> deletePersonByCode(String person_code);
 
     @Operation(
         method = "GET",

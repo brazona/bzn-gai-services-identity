@@ -43,8 +43,6 @@ public class PersonMapper {
 		}
 		String personCode = 
 				Base64.getEncoder().encodeToString((personModel.getDocument() + personModel.getUsername()).getBytes());
-		
-		String gender = entityConst.getPersonGenderEntityName(personModel.getGender());
 				
 		return new PersonEntity(
 				id,
@@ -52,7 +50,8 @@ public class PersonMapper {
 				personModel.getName(),
 				personModel.getName_social(),
 				personModel.getDocument(),
-				gender,
+				"Masculino",  // Temporarily hardcoded,
+				//getGender(personModel),
 				credential);
 	}
 
@@ -81,5 +80,11 @@ public class PersonMapper {
 			return List.of();
 		}
 		return personEntities.stream().map(this::toModel).toList();
+	}
+	private String getGender(PersonModel personModel) {
+		if (personModel == null || personModel.getGender() == null) {
+			return null;
+		}
+		return entityConst.getPersonGenderEntityName(personModel.getGender());
 	}
 }

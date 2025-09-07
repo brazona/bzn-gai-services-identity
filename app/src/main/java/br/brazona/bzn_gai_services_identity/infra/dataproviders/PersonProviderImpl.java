@@ -3,6 +3,7 @@ package br.brazona.bzn_gai_services_identity.infra.dataproviders;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
+import br.brazona.bzn_gai_services_identity.domain.entity.CredentialEntity;
 import br.brazona.bzn_gai_services_identity.domain.entity.PersonEntity;
 import br.brazona.bzn_gai_services_identity.domain.providers.PersonProvider;
 
@@ -44,6 +45,19 @@ public class PersonProviderImpl implements PersonProvider {
 	@Override
 	public List<PersonEntity> getAllPersons() {
 		return personRepository.findAll();
+	}
+	@Override
+
+	public boolean existsByPersonByUsername(CredentialEntity credential) {
+		PersonEntity personEntity = findPersonByCredential(credential);
+		if (personEntity == null) {
+			return false;
+		}
+		return true;	
+	}
+	@Override
+	public PersonEntity findPersonByCredential(CredentialEntity credential) {
+		return personRepository.findPersonByCredential(credential);
 	}
 
 	

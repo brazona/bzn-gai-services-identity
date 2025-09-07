@@ -71,7 +71,11 @@ public class CredentialProviderImpl implements CredentialProvider {
 	}
 	@Override
 	public boolean existsByUsername(String username) {
-		return credentialRepository.existsByUsername(username);
+		CredentialEntity credential = credentialRepository.findByUsername(username);
+		if (credential == null) {
+			return false;
+		}
+		return true;
 	}
 
 }

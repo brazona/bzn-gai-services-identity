@@ -43,27 +43,27 @@ public interface PersonControllerDocs {
     /**
      * Retrieves the person associated with the specified person code.
      *
-     * @param personCode the unique code of the person to be retrieved
+     * @param person_code the unique code of the person to be retrieved
      * @return a {@link ResponseEntity} containing the {@link PersonModel} for the given person code
      */
-	public ResponseEntity<PersonModel> getPersonByCode(String personCode);
+	public ResponseEntity<PersonModel> getPersonByCode(String person_code);
 
     /**
      * Updates an existing person identified by the given person code.
      *
-     * @param personCode the unique code of the person to be updated
+     * @param person_code the unique code of the person to be updated
      * @param personModel the new person information to update
      * @return a {@link ResponseEntity} containing a {@link ResponseModel} with the result of the update operation
      */
-	public ResponseEntity<ResponseModel> updatePersonByCode(String personCode, PersonModel personModel);
+	public ResponseEntity<ResponseModel> updatePersonByCode(String person_code, PersonModel personModel);
     
     /**
      * Deletes the person associated with the specified person code.
      *
-     * @param personCode the unique code of the person to be deleted
+     * @param person_code the unique code of the person to be deleted
      * @return a {@link ResponseEntity} containing a {@link ResponseModel} indicating the result of the operation
      */
-	public ResponseEntity<ResponseModel> deletePersonByCode(String personCode);
+	public ResponseEntity<ResponseModel> deletePersonByCode(String person_code);
 
     /**
      * Retrieves a list of all people.
