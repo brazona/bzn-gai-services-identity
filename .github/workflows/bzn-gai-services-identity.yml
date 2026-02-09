@@ -77,7 +77,7 @@ jobs:
         with:
           servers: |
             [{
-                "id": "github-parent",
+                "id": "github-core",
                 "username": "${{ secrets.MAVEN_GITHUB_USERNAME }}",
                 "password": "${{ secrets.MAVEN_GITHUB_PASSWORD }}"
             }]

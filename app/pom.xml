@@ -133,7 +133,7 @@
 	</dependencies>
 	<repositories>
 		<repository>
-			<id>github-parent</id>
+			<id>github-core</id>
 			<url>https://maven.pkg.github.com/brazona/bzn-parent-services</url>
 			<snapshots>
 				<enabled>true</enabled>
