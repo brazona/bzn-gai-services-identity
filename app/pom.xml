@@ -7,6 +7,12 @@
 		<artifactId>bzn-parent-services</artifactId>
 		<version>0.0.5-SNAPSHOT</version>
 	</parent>
+	<properties>
+		<java.version>21</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<spring-cloud.version>2024.0.1</spring-cloud.version>
+	</properties>
 	<artifactId>bzn-gai-services-identity</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>bzn-gai-services-identity</name>

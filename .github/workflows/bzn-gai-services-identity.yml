@@ -1,9 +1,9 @@
-name: Pipeline Build and Deploy [GRD]
+name: Pipeline Build and Deploy [GAI]
 on:
   pull_request:
     paths:
       - 'app/**'
-      - '.github/workflows/bzn-gdr-services.yml'   
+      - '.github/workflows/bzn-gai-services-identity.yml'   
     branches:
       - 'main'
       - 'develop'
@@ -12,7 +12,7 @@ on:
   push:
     paths:
       - 'app/**'
-      - '.github/workflows/bzn-gdr-services.yml'  
+      - '.github/workflows/bzn-gai-services-identity.yml'  
     branches:
       - 'main'    
   workflow_dispatch:
@@ -29,7 +29,7 @@ env:
   REGISTRY_DOCKER: ghcr.io
   REPOSITORY_DOCKER: ${{ github.repository }}
   VERSION_TYPE: ''
-  APP: gdr
+  APP: gai
 jobs:
   info-environment:
     name: Identifying the Environment

@@ -21,7 +21,7 @@ public class AddressMapper {
 		if (address == null) {
 			return null;
 		}
-		return AddressEntity.builder().username(address.getUsername()).name(address.getName())
+		return AddressEntity.builder().username("").name(address.getName())
 				.street(address.getStreet()).number(address.getNumber()).complement(address.getComplement())
 				.neighborhood(address.getNeighborhood()).city(address.getCity()).state(address.getState())
 				.zipCode(address.getZipCode()).country(address.getCountry()).build();
@@ -30,7 +30,7 @@ public class AddressMapper {
 		if (address == null) {
 			return null;
 		}
-		return AddressEntity.builder().id(id).username(address.getUsername()).name(address.getName())
+		return AddressEntity.builder().id(id).username("").name(address.getName())
 				.street(address.getStreet()).city(address.getCity()).state(address.getState())
 				.zipCode(address.getZipCode()).country(address.getCountry()).build();
 	}	
