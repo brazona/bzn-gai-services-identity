@@ -83,7 +83,7 @@ jobs:
             }]
             
       - name: Build with Maven
-        run: mvn -f ./app/ clean install -Dmaven.javadoc.skip=true
+        run: mvn -f ./app/ clean install -Dmaven.javadoc.skip=true -s ./settings.xml --batch-mode
 
       - name: Log in to the Container registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
