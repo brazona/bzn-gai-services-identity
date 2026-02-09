@@ -51,7 +51,10 @@ jobs:
     name: Build Maven and Build/Push Image Docker
     needs: [info-environment, generate-tag]
     runs-on: ubuntu-latest
-    permissions: write-all
+    permissions:
+      contents: read
+      packages: read
+      write: write-all
     environment:
       name: ${{needs.info-environment.outputs.environment_name}}
     steps:
@@ -83,7 +86,7 @@ jobs:
             }]
             
       - name: Build with Maven
-        run: mvn -f ./app/ clean install -Dmaven.javadoc.skip=true -s ./settings.xml --batch-mode
+        run: mvn -f ./app/ clean install -Dmaven.javadoc.skip=true -U -e
 
       - name: Log in to the Container registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
