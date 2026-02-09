@@ -51,10 +51,7 @@ jobs:
     name: Build Maven and Build/Push Image Docker
     needs: [info-environment, generate-tag]
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: read
-      write: write-all
+    permissions: write-all
     environment:
       name: ${{needs.info-environment.outputs.environment_name}}
     steps:
